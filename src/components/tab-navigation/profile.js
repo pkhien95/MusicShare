@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from 'react-native';
 function ProfileTab() {
   return (
     <View style={styles.container}>
-      <Text>Profile</Text>
+      <Text>Prfffofile</Text>
     </View>
   );
 }
