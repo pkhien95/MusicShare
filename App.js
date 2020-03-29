@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import 'react-native-gesture-handler';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -28,17 +28,6 @@ if (__DEV__) {
     .use(networking())
     .connect();
 }
-
-const config = {
-  clientId: 'c81829338e324b9ebd3169647d1d6482', // available on the app page
-  clientSecret: 'eafd64f9ca744f17a89df2399fd5f354', // click "show client secret" to see this
-  redirectUrl: 'com.myapp:/oauth', // the redirect you defined after creating the app
-  scopes: ['user-read-email', 'playlist-modify-public', 'user-read-private'], // the scopes you need to access
-  serviceConfiguration: {
-    authorizationEndpoint: 'https://accounts.spotify.com/authorize',
-    tokenEndpoint: 'https://accounts.spotify.com/api/token',
-  },
-};
 
 const Stack = createStackNavigator();
 

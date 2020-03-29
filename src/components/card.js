@@ -34,10 +34,9 @@ class CardComponent extends Component {
         <CardItem cardBody>
           <Image
             source={{
-              uri:
-                'https://open.spotify.com/track/5jafMI8FLibnjkYTZ33m0c?si=mWGR4n83T1afrQa1h9lfZg',
+              uri: 'https://open.spotify.com/artist/2JFiletIm3BQ5bhx19Vusf',
             }}
-            style={{ height: 200, width: null, flex: 1 }}
+            style={{ height: 200, width: 200, flex: 1 }}
           />
         </CardItem>
         <CardItem style={{ height: 45 }}>
