@@ -33,20 +33,22 @@ class CardComponent extends Component {
         </CardItem>
         <CardItem cardBody>
           <Image
-            source={images[this.props.imageSource]}
-            style={{ height: 200, width: null, flex: 1 }}
+            source={{
+              uri: 'https://open.spotify.com/artist/2JFiletIm3BQ5bhx19Vusf',
+            }}
+            style={{ height: 200, width: 200, flex: 1 }}
           />
         </CardItem>
         <CardItem style={{ height: 45 }}>
           <Left>
             <Button transparent>
-              <Icon name="ios-heart-outline" style={{ color: 'black' }} />
+              <Icon name="ios-heart" style={{ color: 'black' }} />
             </Button>
             <Button transparent>
-              <Icon name="ios-chatbubbles-outline" style={{ color: 'black' }} />
+              <Icon name="ios-chatbubbles" style={{ color: 'black' }} />
             </Button>
             <Button transparent>
-              <Icon name="ios-send-outline" style={{ color: 'black' }} />
+              <Icon name="ios-send" style={{ color: 'black' }} />
             </Button>
           </Left>
         </CardItem>

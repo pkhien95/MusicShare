@@ -1,59 +1,72 @@
 /* eslint-disable react-native/no-inline-styles */
 import 'react-native-gesture-handler';
-import * as React from 'react';
-import { Text, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import HomeTab from './src/components/tab-navigation/home';
-// import SearchTab from '../components/tab-navigation/search';
-// import AddMediaTab from '../components/tab-navigation/add-media';
-// import LikesTab from '../components/tab-navigation/likes';
-// import ProfileTab from '../components/tab-navigation/profile';
+import Main from './src/main';
+import { doAuthentication } from './src/auth';
+import Reactotron, {
+  trackGlobalErrors,
+  openInEditor,
+  overlay,
+  asyncStorage,
+  networking,
+} from 'reactotron-react-native';
+import { NativeModules } from 'react-native';
 
-function SettingsScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Settings!</Text>
-    </View>
-  );
+let scriptHostname;
+if (__DEV__) {
+  const scriptURL = NativeModules.SourceCode.scriptURL;
+  scriptHostname = scriptURL.split('://')[1].split(':')[0];
+  Reactotron.configure({ host: scriptHostname })
+    .use(trackGlobalErrors())
+    .use(openInEditor())
+    .use(overlay())
+    .use(asyncStorage())
+    .use(networking())
+    .connect();
 }
 
-const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
 
-function MyTabs() {
+function Title() {
+  return <Text>Music To My Ears</Text>;
+}
+function MyStack() {
   return (
-    <Tab.Navigator
-      screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, size }) => {
-          let iconName;
-
-          if (route.name === 'Home') {
-            iconName = focused
-              ? 'ios-information-circle'
-              : 'ios-information-circle-outline';
-          } else if (route.name === 'Settings') {
-            iconName = focused ? 'ios-list-box' : 'ios-list';
-          }
-
-          // You can return any component that you like here!
-          return <Ionicons name={iconName} size={size} color={color} />;
-        },
-      })}
-      tabBarOptions={{
-        activeTintColor: 'tomato',
-        inactiveTintColor: 'gray',
-      }}>
-      <Tab.Screen name="Home" component={HomeTab} />
-      <Tab.Screen name="Settings" component={SettingsScreen} />
-    </Tab.Navigator>
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Main"
+        component={Main}
+        options={{
+          headerTintColor: 'white',
+          headerLeft: () => (
+            <Ionicons size={24} name="ios-camera" style={{ paddingLeft: 10 }} />
+          ),
+          headerTitle: () => <Title />,
+          headerRight: () => (
+            <Ionicons size={24} style={{ paddingRight: 10 }} name="ios-send" />
+          ),
+        }}
+      />
+    </Stack.Navigator>
   );
 }
 
 export default function App() {
+  useEffect(() => {
+    // Create an scoped async function in the hook
+    async function anyNameFunction() {
+      await doAuthentication();
+    }
+    // Execute the created function directly
+    anyNameFunction();
+  }, []);
   return (
     <NavigationContainer>
-      <MyTabs />
+      <MyStack />
     </NavigationContainer>
   );
 }

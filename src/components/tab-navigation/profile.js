@@ -1,22 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-import { Icon } from 'native-base';
-
-class ProfileTab extends Component {
-  static navigationOptions = {
-    tabBarIcon: ({ tintColor }) => (
-      <Icon name="person" style={{ color: tintColor }} />
-    ),
-  };
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>ProfileTab</Text>
-      </View>
-    );
-  }
+function ProfileTab() {
+  return (
+    <View style={styles.container}>
+      <Text>Prfffofile</Text>
+    </View>
+  );
 }
 export default ProfileTab;
 
