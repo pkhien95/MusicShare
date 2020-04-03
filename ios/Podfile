@@ -33,20 +33,9 @@ target 'MusicApp' do
   pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
-  target 'MusicAppTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
 
   use_native_modules!
-end
 
-target 'MusicApp-tvOS' do
-  # Pods for MusicApp-tvOS
-
-  target 'MusicApp-tvOSTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
 
 end
+
