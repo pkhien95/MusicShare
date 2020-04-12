@@ -1,18 +1,26 @@
 import React from 'react'
 import { FlatList, PixelRatio, StyleSheet, View } from 'react-native'
-import AlbumItem from './AlbumItem'
-import NAVIGATORS from '../../../../constants/navigators'
-import { useNavigation } from '@react-navigation/native'
+import TrackItem from './TrackItem'
+import { showToast } from '../../../toast/actions'
+import { ToastType } from '../../../toast/constants'
 
-type AlbumsSectionProps = {
+type TracksListProps = {
   data: any[],
+  showBottomActionSheet: (actions: Array<any>) => void,
 }
 
-class AlbumsSection extends React.PureComponent<AlbumsSectionProps> {
+class TracksList extends React.PureComponent<TracksListProps> {
   renderItem = ({ item, index }) => {
-    const { id, images, name } = item
-    const itemData = { id, name, image: images[2] }
-    return <AlbumItem item={itemData} onItemPress={this.onItemPress} />
+    const { id, name, artists } = item
+    const itemData = { id, name, artists }
+    return (
+      <TrackItem
+        item={itemData}
+        onItemPress={this.onItemPress}
+        onTrackPlayPress={this.onTrackPlayPress}
+        onTrackViewMorePress={this.onTrackViewMorePress}
+      />
+    )
   }
 
   keyExtractor = (item, index) => {
@@ -23,12 +31,27 @@ class AlbumsSection extends React.PureComponent<AlbumsSectionProps> {
     return <View style={styles.divider} />
   }
 
-  onItemPress = (id: string) => {
-    this.props.navigation.navigate(NAVIGATORS.albumDetails, { id })
+  onItemPress = (id: string) => {}
+
+  onTrackPlayPress = (id: string) => {}
+
+  onTrackViewMorePress = (id: string) => {
+    const actions = [
+      {
+        icon: 'md-add',
+        text: 'Add to my list',
+        afterAction: showToast(
+          ToastType.INFO,
+          'Added to my list successfully.',
+        ),
+      },
+    ]
+    this.props.showBottomActionSheet(actions)
   }
 
   render() {
     const { data } = this.props
+
     return (
       <FlatList
         data={data}
@@ -60,8 +83,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default function(props) {
-  const navigation = useNavigation()
-
-  return <AlbumsSection {...props} navigation={navigation} />
-}
+export default TracksList

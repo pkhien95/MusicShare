@@ -5,6 +5,7 @@ const NAVIGATORS = {
   addMedia: 'AddMedia',
   likes: 'Likes',
   profile: 'Profile',
+  albumDetails: 'AlbumDetails',
 }
 
 export default NAVIGATORS

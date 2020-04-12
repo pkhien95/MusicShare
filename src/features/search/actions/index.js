@@ -31,5 +31,5 @@ export const spotifySearchFailure = (error: any) => ({
 })
 
 export const searchReset = () => ({
-  type: ActionTypes.SEARCH_RESET
+  type: ActionTypes.SEARCH_RESET,
 })

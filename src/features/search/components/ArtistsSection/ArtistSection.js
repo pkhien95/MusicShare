@@ -10,12 +10,14 @@ class ArtistSection extends React.PureComponent<ArtistSectionProps> {
   renderItem = ({ item, index }) => {
     const { images, name } = item
     const itemData = { name, image: images[2] }
-    return <ArtistItem item={itemData} />
+    return <ArtistItem item={itemData} onItemPress={this.onItemPress} />
   }
 
   keyExtractor = (item, index) => {
     return item.id || index.toString()
   }
+
+  onItemPress = (id: string) => {}
 
   render() {
     const { data } = this.props

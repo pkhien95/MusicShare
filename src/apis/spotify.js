@@ -1,5 +1,5 @@
 import { spotifyInstance } from './base'
-import axios from 'axios'
+
 export const search = (
   keywords: string,
   types: string,
@@ -14,4 +14,8 @@ export const search = (
       offset,
     },
   })
+}
+
+export const getAlbumDetails = (id: string) => {
+  return spotifyInstance.get(`albums/${id}`)
 }

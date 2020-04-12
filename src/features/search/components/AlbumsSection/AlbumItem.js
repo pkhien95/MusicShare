@@ -1,29 +1,41 @@
 import React from 'react'
-import { Image, StyleSheet, Text, View } from 'react-native'
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 
 type ArtistItemProps = {
   item: any,
+  onItemPress: (id: string) => void,
 }
 
 function AlbumItem(props: ArtistItemProps) {
   const {
-    item: { image, name },
+    item: { id, image, name },
+    onItemPress,
   } = props
-  console.log('props: ', props)
+
+  const onPress = () => {
+    onItemPress(id)
+  }
+
   const imageSource = image
     ? { uri: image.url }
     : require('../../../../assets/images/album.png')
   return (
-    <View style={styles.container}>
-      <Image style={[styles.image]} source={imageSource} />
-      <Text style={styles.nameText}>{name}</Text>
-    </View>
+    <TouchableOpacity style={styles.touchable} onPress={onPress}>
+      <View style={styles.container}>
+        <Image style={[styles.image]} source={imageSource} />
+        <Text style={styles.nameText} numberOfLines={2}>
+          {name}
+        </Text>
+      </View>
+    </TouchableOpacity>
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
+  touchable: {
     paddingHorizontal: 10,
+  },
+  container: {
     alignItems: 'center',
     flexDirection: 'row',
     overflow: 'hidden',
