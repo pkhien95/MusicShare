@@ -6,6 +6,7 @@ const NAVIGATORS = {
   likes: 'Likes',
   profile: 'Profile',
   albumDetails: 'AlbumDetails',
+  artistDetails: 'ArtistDetails',
 }
 
 export default NAVIGATORS

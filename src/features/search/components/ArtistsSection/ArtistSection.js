@@ -1,6 +1,8 @@
 import React from 'react'
 import { FlatList, StyleSheet } from 'react-native'
 import ArtistItem from './ArtistItem'
+import { useNavigation } from '@react-navigation/native'
+import NAVIGATORS from '../../../../constants/navigators'
 
 type ArtistSectionProps = {
   data: any[],
@@ -8,8 +10,8 @@ type ArtistSectionProps = {
 
 class ArtistSection extends React.PureComponent<ArtistSectionProps> {
   renderItem = ({ item, index }) => {
-    const { images, name } = item
-    const itemData = { name, image: images[2] }
+    const { id, images, name } = item
+    const itemData = { id, name, image: images[2] }
     return <ArtistItem item={itemData} onItemPress={this.onItemPress} />
   }
 
@@ -17,7 +19,9 @@ class ArtistSection extends React.PureComponent<ArtistSectionProps> {
     return item.id || index.toString()
   }
 
-  onItemPress = (id: string) => {}
+  onItemPress = (id: string) => {
+    this.props.navigation.navigate(NAVIGATORS.artistDetails, { id })
+  }
 
   render() {
     const { data } = this.props
@@ -30,6 +34,7 @@ class ArtistSection extends React.PureComponent<ArtistSectionProps> {
         contentContainerStyle={styles.container}
         showsHorizontalScrollIndicator={false}
         style={styles.list}
+        keyboardShouldPersistTaps={'always'}
       />
     )
   }
@@ -44,4 +49,8 @@ const styles = StyleSheet.create({
   },
 })
 
-export default ArtistSection
+export default function(props) {
+  const navigation = useNavigation()
+
+  return <ArtistSection {...props} navigation={navigation} />
+}

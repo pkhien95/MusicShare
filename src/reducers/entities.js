@@ -1,8 +1,9 @@
 import * as SearchActionTypes from '../features/search/actions/action-types'
 import * as AlbumDetailsActionTypes from '../features/album-details/actions/action-types'
+import * as ArtistDetailsActionTypes from '../features/artist-details/actions/action-types'
 import update from 'immutability-helper'
 import { normalize } from 'normalizr'
-import { albumSchema, artistSchema } from '../schemas'
+import { albumSchema, artistSchema, trackSchema } from '../schemas'
 import { merge } from 'lodash'
 import '../utils/immutablility-helper'
 
@@ -47,12 +48,31 @@ const handleSpotifyGetAlbumDetailsSuccess = (state, action) => {
   })
 }
 
+const handleSpotifyGetArtistTopTracksSuccess = (state, action) => {
+  const { result } = action.payload
+  const normalizedAlbums = normalize(result, [trackSchema])
+
+  return update(state, {
+    artists: {
+      $deepMerge: normalizedAlbums.entities.artists || {},
+    },
+    tracks: {
+      $deepMerge: normalizedAlbums.entities.tracks || {},
+    },
+  })
+}
+
 const entitiesReducer = (state = initialState, action) => {
   switch (action.type) {
     case SearchActionTypes.SPOTIFY_SEARCH_SUCCESS:
       return handleSpotifySearchSuccess(state, action)
+
     case AlbumDetailsActionTypes.GET_ALBUM_DETAILS_SUCCESS:
       return handleSpotifyGetAlbumDetailsSuccess(state, action)
+
+    case ArtistDetailsActionTypes.GET_ARTIST_TOP_TRACKS_SUCCESS:
+      return handleSpotifyGetArtistTopTracksSuccess(state, action)
+
     default:
       return state
   }

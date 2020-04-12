@@ -3,7 +3,7 @@ import { get } from 'lodash'
 
 const getAlbumEntities = state => state.entities.albums
 
-const getTrackEntities = state => ({ ...state.entities.tracks })
+const getTrackEntities = state => state.entities.tracks
 
 const getArtistEntities = state => state.entities.artists
 

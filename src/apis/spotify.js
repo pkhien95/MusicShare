@@ -19,3 +19,7 @@ export const search = (
 export const getAlbumDetails = (id: string) => {
   return spotifyInstance.get(`albums/${id}`)
 }
+
+export const getArtistTopTracks = (id: string) => {
+  return spotifyInstance.get(`artists/${id}/top-tracks?country=US`)
+}
