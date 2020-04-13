@@ -4,6 +4,7 @@ import spotifyReducer from './spotify'
 import { searchReducer } from '../features/search'
 import bottomActionSheetReducer from '../features/bottom-actions-sheet/reducers'
 import toastReducer from '../features/toast/reducers'
+import homeReducer from '../features/home/reducers'
 
 const rootReducer = combineReducers({
   entities: entitiesReducer,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   search: searchReducer,
   bottomActionSheet: bottomActionSheetReducer,
   toast: toastReducer,
+  home: homeReducer,
 })
 
 export default rootReducer

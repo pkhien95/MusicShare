@@ -3,6 +3,8 @@ import ArtistDetails from '../components/ArtistDetails'
 import { getArtistTopTracksRequest } from '../actions'
 import { artistSelector, tracksSelector } from '../selectors'
 import { showBottomActionSheet } from '../../bottom-actions-sheet/actions'
+import {showToast} from '../../toast/actions'
+import * as HomeActions from '../../home/actions'
 
 const mapStateToProps = (state, ownProps) => ({
   artist: artistSelector(state, ownProps),
@@ -13,6 +15,8 @@ const mapDispatchToProps = dispatch => ({
   getArtistTopTracks: (id: string) => dispatch(getArtistTopTracksRequest(id)),
   showBottomActionSheet: (actions: Array<any>) =>
     dispatch(showBottomActionSheet(actions)),
+  showToast: (toastType: string, message: string) =>
+    dispatch(showToast(toastType, message)),
 })
 
 export default connect(

@@ -4,6 +4,7 @@ import bootstrapSaga from './bootstrap'
 import searchSaga from '../features/search/sagas'
 import albumDetailsSaga from '../features/album-details/sagas'
 import artistDetailsSaga from '../features/artist-details/sagas'
+import homeSaga from '../features/home/sagas'
 
 function* rootSaga() {
   yield all([
@@ -12,6 +13,7 @@ function* rootSaga() {
     searchSaga(),
     albumDetailsSaga(),
     artistDetailsSaga(),
+    homeSaga(),
   ])
 }
 

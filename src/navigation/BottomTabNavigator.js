@@ -8,6 +8,7 @@ import AddMediaStackNavigator from './AddMediaStackNavigator'
 import LikesStackNavigator from './LikesStackNavigator'
 import ProfileStackNavigator from './ProfileStackNavigator'
 import NAVIGATORS from '../constants/navigators'
+import COLORS from '../theme/colors'
 
 const Tab = createBottomTabNavigator()
 
@@ -22,8 +23,8 @@ function BottomTabNavigator() {
             },
           }),
         },
-        activeTintColor: '#000',
-        inactiveTintColor: '#d1cece',
+        activeTintColor: COLORS.black,
+        inactiveTintColor: COLORS.lightGrey,
         showLabel: false,
         showIcon: true,
       }}>
@@ -31,8 +32,8 @@ function BottomTabNavigator() {
         name={NAVIGATORS.home}
         component={HomeStackNavigator}
         options={{
-          tabBarIcon: ({ tintColor }) => (
-            <Ionicons size={24} name="ios-home" style={{ color: tintColor }} />
+          tabBarIcon: ({ color }) => (
+            <Ionicons size={24} name="ios-home" style={{ color }} />
           ),
         }}
       />
@@ -40,12 +41,8 @@ function BottomTabNavigator() {
         name={NAVIGATORS.search}
         component={SearchStackNavigator}
         options={{
-          tabBarIcon: ({ tintColor }) => (
-            <Ionicons
-              size={24}
-              name="ios-search"
-              style={{ color: tintColor }}
-            />
+          tabBarIcon: ({ color }) => (
+            <Ionicons size={24} name="ios-search" style={{ color }} />
           ),
         }}
       />
@@ -53,12 +50,8 @@ function BottomTabNavigator() {
         name={NAVIGATORS.addMedia}
         component={AddMediaStackNavigator}
         options={{
-          tabBarIcon: ({ tintColor }) => (
-            <Ionicons
-              size={24}
-              name="ios-add-circle"
-              style={{ color: tintColor }}
-            />
+          tabBarIcon: ({ color }) => (
+            <Ionicons size={24} name="ios-add-circle" style={{ color }} />
           ),
         }}
       />
@@ -66,8 +59,8 @@ function BottomTabNavigator() {
         name={NAVIGATORS.likes}
         component={LikesStackNavigator}
         options={{
-          tabBarIcon: ({ tintColor }) => (
-            <Ionicons size={24} name="ios-heart" style={{ color: tintColor }} />
+          tabBarIcon: ({ color }) => (
+            <Ionicons size={24} name="ios-heart" style={{ color }} />
           ),
         }}
       />
@@ -75,12 +68,8 @@ function BottomTabNavigator() {
         name={NAVIGATORS.profile}
         component={ProfileStackNavigator}
         options={{
-          tabBarIcon: ({ tintColor }) => (
-            <Ionicons
-              size={24}
-              name="ios-person"
-              style={{ color: tintColor }}
-            />
+          tabBarIcon: ({ color }) => (
+            <Ionicons size={24} name="ios-person" style={{ color }} />
           ),
         }}
       />

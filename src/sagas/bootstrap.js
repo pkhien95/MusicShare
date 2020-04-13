@@ -35,6 +35,10 @@ function* bootstrapApplication() {
     yield call(authorizeSpotify)
   } else if (!isSpotifyTokenValid(spotifyAuth)) {
     yield call(refreshSpotify)
+  } else {
+    // yield call(SpotifyRemote.connect, spotifyAuth.accessToken)
+    // const session = yield call(auth.getSession)
+    // console.log(session)
   }
 
   yield put(bootstrapApplicationComplete())

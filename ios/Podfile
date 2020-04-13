@@ -34,7 +34,11 @@ target 'MusicApp' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
+  pod 'RNEventEmitter', :path => "../node_modules/react-native-events"
+  pod 'RNSpotifyRemote', :path => '../node_modules/react-native-spotify-remote'
+
   use_native_modules!
+
 
 
 end

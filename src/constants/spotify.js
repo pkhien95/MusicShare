@@ -1,3 +1,5 @@
+import { auth as SpotifyAuth, remote as SpotifyRemote, ApiScope, ApiConfig } from 'react-native-spotify-remote';
+
 export const SPOTIFY_CONFIG = {
   clientId: 'c81829338e324b9ebd3169647d1d6482', // available on the app page
   clientSecret: 'eafd64f9ca744f17a89df2399fd5f354', // click "show client secret" to see this
@@ -12,9 +14,13 @@ export const SPOTIFY_CONFIG = {
     'playlist-read-collaborative',
     'playlist-modify-public',
     'playlist-modify-private',
+    'app-remote-control',
+    'user-follow-read',
   ], // the scopes you need to access
   serviceConfiguration: {
     authorizationEndpoint: 'https://accounts.spotify.com/authorize',
     tokenEndpoint: 'https://accounts.spotify.com/api/token',
   },
 }
+
+

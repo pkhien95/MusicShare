@@ -6,8 +6,6 @@ import COLORS from '../../../theme/colors'
 import { StackNavigationProp } from '@react-navigation/stack'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import TracksList from './tracks-list/TracksList'
-import { showToast } from '../../toast/actions'
-import { ToastType } from '../../toast/constants'
 
 type ArtistDetailsProps = {
   route: RouteProp,
@@ -17,6 +15,7 @@ type ArtistDetailsProps = {
   artists: Array<any>,
   tracks: Array<any>,
   showBottomActionSheet: (actions: Array<any>) => void,
+  showToast: (toastType: string, message: string) => void,
 }
 
 class ArtistDetails extends React.Component<ArtistDetailsProps> {
@@ -29,20 +28,6 @@ class ArtistDetails extends React.Component<ArtistDetailsProps> {
     this.props.navigation.goBack()
   }
 
-  onHeaderMoreButtonPress = () => {
-    const actions = [
-      {
-        icon: 'md-add',
-        text: 'Add to my list',
-        afterAction: showToast(
-          ToastType.INFO,
-          'Added to my list successfully.',
-        ),
-      },
-    ]
-    this.props.showBottomActionSheet(actions)
-  }
-
   renderScreenHeader = () => {
     const buttonHitSlop = { top: 12, right: 12, bottom: 12, left: 12 }
     return (
@@ -53,18 +38,17 @@ class ArtistDetails extends React.Component<ArtistDetailsProps> {
           hitSlop={buttonHitSlop}>
           <Ionicons name={'ios-arrow-back'} size={20} color={COLORS.black} />
         </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.headerMoreButton}
-          onPress={this.onHeaderMoreButtonPress}
-          hitSlop={buttonHitSlop}>
-          <Ionicons name={'ios-more'} size={20} color={COLORS.black} />
-        </TouchableOpacity>
       </View>
     )
   }
 
   render() {
-    const { artist, tracks, showBottomActionSheet } = this.props
+    const {
+      artist,
+      tracks,
+      showBottomActionSheet,
+      showToast,
+    } = this.props
     const { images, name } = artist
 
     const imageSource = !isEmpty(images)
@@ -82,6 +66,7 @@ class ArtistDetails extends React.Component<ArtistDetailsProps> {
         <TracksList
           data={tracks}
           showBottomActionSheet={showBottomActionSheet}
+          showToast={showToast}
         />
         {this.renderScreenHeader()}
       </View>

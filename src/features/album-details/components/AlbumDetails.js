@@ -7,8 +7,7 @@ import { getArtistsNamesFromList } from '../../../utils'
 import { StackNavigationProp } from '@react-navigation/stack'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import TracksList from './tracks-list/TracksList'
-import { showToast } from '../../toast/actions'
-import { ToastType } from '../../toast/constants'
+import { addNewAlbumRequest } from '../../home/actions'
 
 type AlbumDetailsProps = {
   route: RouteProp,
@@ -31,17 +30,17 @@ class AlbumDetails extends React.Component<AlbumDetailsProps> {
   }
 
   onHeaderMoreButtonPress = () => {
+    const { showBottomActionSheet, route } = this.props
+
     const actions = [
       {
         icon: 'md-add',
         text: 'Add to my list',
-        afterAction: showToast(
-          ToastType.INFO,
-          'Added to my list successfully.',
-        ),
+        afterAction: addNewAlbumRequest(route.params.id),
       },
     ]
-    this.props.showBottomActionSheet(actions)
+
+    showBottomActionSheet(actions)
   }
 
   renderScreenHeader = () => {
@@ -65,7 +64,12 @@ class AlbumDetails extends React.Component<AlbumDetailsProps> {
   }
 
   render() {
-    const { album, artists, tracks, showBottomActionSheet } = this.props
+    const {
+      album,
+      artists,
+      tracks,
+      showBottomActionSheet,
+    } = this.props
     const { images, name } = album
 
     const imageSource = !isEmpty(images)

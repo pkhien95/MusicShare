@@ -8,10 +8,13 @@ import {
   refreshSpotifySuccess,
 } from './actions'
 import { SPOTIFY_CONFIG } from '../constants/spotify'
+import * as SpotifyRemote from '../service/spotify-remote'
 
 function* authSpotify() {
   try {
     const authState = yield call(authorize, SPOTIFY_CONFIG)
+
+    SpotifyRemote.connect(authState.accessToken)
     yield put(authSpotifySuccess(authState))
   } catch (error) {
     yield put(authSpotifyFailure(error))
@@ -22,6 +25,8 @@ function* refreshSpotify() {
   try {
     const refreshToken = yield select(state => state.spotify.auth.refreshToken)
     const authState = yield call(refresh, SPOTIFY_CONFIG, { refreshToken })
+
+    SpotifyRemote.connect(authState.accessToken)
     yield put(refreshSpotifySuccess(authState))
   } catch (error) {
     yield put(refreshSpotifyFailure(error))

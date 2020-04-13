@@ -1,3 +1,3 @@
-import { default as HomeScreen } from './ components/Home'
+import { default as HomeScreen } from './containers'
 
 export { HomeScreen }
