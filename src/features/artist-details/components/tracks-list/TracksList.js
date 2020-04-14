@@ -1,7 +1,6 @@
 import React from 'react'
 import { FlatList, PixelRatio, StyleSheet, View } from 'react-native'
 import TrackItem from './TrackItem'
-import { ToastType } from '../../../toast/constants'
 import { addNewTrackRequest } from '../../../home/actions'
 
 type TracksListProps = {
@@ -37,7 +36,7 @@ class TracksList extends React.PureComponent<TracksListProps> {
   onTrackPlayPress = (id: string) => {}
 
   onTrackViewMorePress = (id: string) => {
-    const { showBottomActionSheet, showToast } = this.props
+    const { showBottomActionSheet } = this.props
     const actions = [
       {
         icon: 'md-add',
@@ -45,8 +44,6 @@ class TracksList extends React.PureComponent<TracksListProps> {
         afterAction: addNewTrackRequest(id),
       },
     ]
-
-    showToast(ToastType.INFO, 'Added to my list successfully.')
     showBottomActionSheet(actions)
   }
 

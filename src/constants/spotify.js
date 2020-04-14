@@ -1,9 +1,17 @@
-import { auth as SpotifyAuth, remote as SpotifyRemote, ApiScope, ApiConfig } from 'react-native-spotify-remote';
+import {
+  SPOTIFY_CLIENT_CALLBACK,
+  SPOTIFY_CLIENT_ID,
+  SPOTIFY_CLIENT_SECRET,
+  SPOTIFY_TOKEN_REFRESH_URL,
+  SPOTIFY_TOKEN_SWAP_URL,
+} from 'react-native-dotenv'
 
 export const SPOTIFY_CONFIG = {
-  clientId: 'c81829338e324b9ebd3169647d1d6482', // available on the app page
-  clientSecret: 'eafd64f9ca744f17a89df2399fd5f354', // click "show client secret" to see this
-  redirectUrl: 'com.theuimachine.music:/callback', // the redirect you defined after creating the app
+  clientId: SPOTIFY_CLIENT_ID, // available on the app page
+  clientSecret: SPOTIFY_CLIENT_SECRET, // click "show client secret" to see this
+  redirectUrl: SPOTIFY_CLIENT_CALLBACK, // the redirect you defined after creating the app
+  tokenSwapUrl: SPOTIFY_TOKEN_SWAP_URL,
+  tokenRefreshUrl: SPOTIFY_TOKEN_REFRESH_URL,
   scopes: [
     'user-modify-playback-state',
     'user-read-currently-playing',
@@ -22,5 +30,3 @@ export const SPOTIFY_CONFIG = {
     tokenEndpoint: 'https://accounts.spotify.com/api/token',
   },
 }
-
-

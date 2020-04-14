@@ -65,7 +65,11 @@ class HomeItem extends React.PureComponent<HomeItemProps> {
               ? this.onPauseButtonPress
               : this.onPlayButtonPress
           }>
-          <Ionicons name={this.props.isPlaying ? 'ios-pause' : 'md-play'} size={20} color={COLORS.black} />
+          <Ionicons
+            name={this.props.isPlaying ? 'ios-pause' : 'md-play'}
+            size={20}
+            color={COLORS.black}
+          />
         </TouchableOpacity>
         <TouchableOpacity
           hitSlop={buttonHitSlop}

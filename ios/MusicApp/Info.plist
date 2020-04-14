@@ -27,7 +27,7 @@
 			<string>com.theuimachine.music</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>music</string>
+				<string>com.theuimachine.music</string>
 			</array>
 		</dict>
 	</array>

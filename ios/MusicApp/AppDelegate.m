@@ -10,6 +10,7 @@
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
+#import <RNSpotifyRemote.h>
 
 @implementation AppDelegate
 
@@ -42,7 +43,10 @@
 - (BOOL)application:(UIApplication *)app
             openURL:(NSURL *)url
             options:(NSDictionary<NSString *, id> *)options {
-  return [self.authorizationFlowManagerDelegate resumeExternalUserAgentFlowWithURL:url];
+  NSLog(@"Open from url %@", url);
+  
+//  return [self.authorizationFlowManagerDelegate resumeExternalUserAgentFlowWithURL:url];
+  return [[RNSpotifyRemoteAuth sharedInstance] application:app openURL:url options:options];
 }
 
 @end

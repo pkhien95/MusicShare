@@ -88,10 +88,12 @@ class BottomActionSheet extends React.Component<BottomActionSheetProps> {
         transparent={true}
         animationType={'fade'}>
         <TouchableWithoutFeedback
-          style={styles.containerTouchable}
+          style={[styles.containerTouchable]}
           onPress={this.onOverlayPress}>
           <View style={[styles.container, styles.overlay]}>
-            {this.renderActions(actions)}
+            <View style={styles.actionsContainer}>
+              {this.renderActions(actions)}
+            </View>
           </View>
         </TouchableWithoutFeedback>
       </Modal>
@@ -107,12 +109,11 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   container: {
-    flex: 1,
     justifyContent: 'flex-end',
     alignItems: 'stretch',
+    flex: 1,
   },
   overlay: {
-    ...StyleSheet.absoluteFillObject,
     backgroundColor: COLORS.overlay,
   },
   actionContainer: {
@@ -121,6 +122,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingVertical: 10,
+  },
+  actionsContainer: {
+    backgroundColor: COLORS.white,
+    paddingBottom: 20,
   },
   actionText: {
     marginLeft: 10,

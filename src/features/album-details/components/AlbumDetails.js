@@ -1,5 +1,12 @@
 import React from 'react'
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import {
+  Image,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native'
 import { RouteProp } from '@react-navigation/native'
 import { isEmpty } from 'lodash'
 import COLORS from '../../../theme/colors'
@@ -64,12 +71,7 @@ class AlbumDetails extends React.Component<AlbumDetailsProps> {
   }
 
   render() {
-    const {
-      album,
-      artists,
-      tracks,
-      showBottomActionSheet,
-    } = this.props
+    const { album, artists, tracks, showBottomActionSheet } = this.props
     const { images, name } = album
 
     const imageSource = !isEmpty(images)
@@ -78,28 +80,34 @@ class AlbumDetails extends React.Component<AlbumDetailsProps> {
     const albumArtistsText = `by ${getArtistsNamesFromList(artists)}`
 
     return (
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <Image source={imageSource} style={styles.albumImage} />
-          <Text style={styles.albumNameText}>{name}</Text>
-          <Text style={styles.albumArtistsText}>{albumArtistsText}</Text>
+      <SafeAreaView style={styles.safeArea}>
+        <View style={styles.container}>
+          <View style={styles.header}>
+            <Image source={imageSource} style={styles.albumImage} />
+            <Text style={styles.albumNameText}>{name}</Text>
+            <Text style={styles.albumArtistsText}>{albumArtistsText}</Text>
+          </View>
+          <TracksList
+            data={tracks}
+            showBottomActionSheet={showBottomActionSheet}
+          />
+          {this.renderScreenHeader()}
         </View>
-        <TracksList
-          data={tracks}
-          showBottomActionSheet={showBottomActionSheet}
-        />
-        {this.renderScreenHeader()}
-      </View>
+      </SafeAreaView>
     )
   }
 }
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: COLORS.white,
+  },
   container: {
     flex: 1,
     alignItems: 'stretch',
-    backgroundColor: COLORS.white,
-    paddingVertical: 40,
+    paddingBottom: 30,
+    paddingTop: 10,
   },
   header: {
     alignItems: 'center',
@@ -122,7 +130,7 @@ const styles = StyleSheet.create({
   screenHeader: {
     width: '100%',
     position: 'absolute',
-    top: 30,
+    top: 10,
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',

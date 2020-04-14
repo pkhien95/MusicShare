@@ -1,4 +1,4 @@
-import { call, put, select, take, takeEvery } from 'redux-saga/effects'
+import { call, delay, put, select, take, takeEvery } from 'redux-saga/effects'
 import {
   ActionTypes,
   authSpotifyRequest,
@@ -7,6 +7,8 @@ import {
 } from './actions'
 import { isEmpty } from 'lodash'
 import { isSpotifyTokenValid } from '../utils'
+import { ApiScope, auth, remote } from 'react-native-spotify-remote'
+import { SPOTIFY_CONFIG } from '../constants/spotify'
 
 function* authorizeSpotify() {
   yield put(authSpotifyRequest())
@@ -27,6 +29,19 @@ function* refreshSpotify() {
   }
 }
 
+function* authorizeAppRemote() {
+  yield delay(500)
+  const config = {
+    clientID: SPOTIFY_CONFIG.clientId,
+    redirectURL: SPOTIFY_CONFIG.redirectUrl,
+    tokenRefreshURL: SPOTIFY_CONFIG.tokenRefreshUrl,
+    tokenSwapURL: SPOTIFY_CONFIG.tokenSwapUrl,
+    scope: ApiScope.AppRemoteControlScope,
+  }
+  const token = yield call(auth.initialize, config)
+  yield call(remote.connect, token)
+}
+
 function* bootstrapApplication() {
   yield take(ActionTypes.REHYDRATION_COMPLETE)
   const spotifyAuth = yield select(state => state.spotify.auth)
@@ -35,10 +50,11 @@ function* bootstrapApplication() {
     yield call(authorizeSpotify)
   } else if (!isSpotifyTokenValid(spotifyAuth)) {
     yield call(refreshSpotify)
-  } else {
-    // yield call(SpotifyRemote.connect, spotifyAuth.accessToken)
-    // const session = yield call(auth.getSession)
-    // console.log(session)
+  }
+
+  const isRemoteConnected = yield call(remote.isConnectedAsync)
+  if (!isRemoteConnected) {
+    yield call(authorizeAppRemote)
   }
 
   yield put(bootstrapApplicationComplete())

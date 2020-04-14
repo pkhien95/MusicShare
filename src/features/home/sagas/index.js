@@ -4,6 +4,8 @@ import * as Actions from '../actions'
 import * as ToastActions from '../../toast/actions'
 import { HOME_SCREEN_ITEM_TYPE } from '../constants'
 import { ToastType } from '../../toast/constants'
+import NavigationService from '../../../service/navigation'
+import NAVIGATORS from '../../../constants/navigators'
 
 function* itemExists(id: string, itemType: string) {
   const homeItems = yield select(state => state.home)
@@ -29,6 +31,7 @@ function* addNewItem(action) {
       )
     } else {
       yield put(Actions.addNewAlbumSuccess({ id }))
+      NavigationService.navigatorRef.current?.navigate(NAVIGATORS.home)
       yield put(ToastActions.showToast(ToastType.INFO, 'Added album to home.'))
     }
   } else {
@@ -42,6 +45,7 @@ function* addNewItem(action) {
       )
     } else {
       yield put(Actions.addNewTrackSuccess({ id }))
+      NavigationService.navigatorRef.current?.navigate(NAVIGATORS.home)
       yield put(ToastActions.showToast(ToastType.INFO, 'Added track to home.'))
     }
   }
