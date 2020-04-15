@@ -49,3 +49,10 @@ export const bootstrapApplicationStart = () => ({
 export const bootstrapApplicationComplete = () => ({
   type: ActionTypes.BOOTSTRAP_APPLICATION_COMPLETE,
 })
+
+export const spotifyReceiveEvent = (eventKey: string) => ({
+  type: ActionTypes.SPOTIFY_RECEIVE_EVENT,
+  payload: {
+    event: eventKey,
+  },
+})

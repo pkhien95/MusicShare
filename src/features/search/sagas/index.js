@@ -7,7 +7,6 @@ import { get } from 'lodash'
 function* search(action) {
   try {
     const { keywords, types, limit, offset } = action.payload
-
     const result = yield call(spotifyApi.search, keywords, types, limit, offset)
     const artists = get(result, 'data.artists.items', [])
     const albums = get(result, 'data.albums.items', [])

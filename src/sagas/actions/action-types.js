@@ -10,3 +10,5 @@ export const REHYDRATION_COMPLETE = 'rehydration_complete'
 
 export const BOOTSTRAP_APPLICATION_START = 'bootstrap_application_start'
 export const BOOTSTRAP_APPLICATION_COMPLETE = 'bootstrap_application_complete'
+
+export const SPOTIFY_RECEIVE_EVENT = 'SPOTIFY_RECEIVE_EVENT'

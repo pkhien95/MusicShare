@@ -9,6 +9,7 @@ import { rehydrationComplete } from '../sagas/actions'
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
+  blacklist: ['app'],
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

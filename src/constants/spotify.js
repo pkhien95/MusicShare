@@ -22,11 +22,15 @@ export const SPOTIFY_CONFIG = {
     'playlist-read-collaborative',
     'playlist-modify-public',
     'playlist-modify-private',
-    'app-remote-control',
-    'user-follow-read',
   ], // the scopes you need to access
   serviceConfiguration: {
     authorizationEndpoint: 'https://accounts.spotify.com/authorize',
     tokenEndpoint: 'https://accounts.spotify.com/api/token',
   },
+}
+
+export const RemoteEvent = {
+  PLAYER_STATE_CHANGED: 'playerStateChanged',
+  REMOTE_DISCONNECTED: 'remoteDisconnected',
+  REMOTE_CONNECTED: 'remoteConnected'
 }

@@ -4,8 +4,12 @@ const https = require('https');
 const crypto = require('crypto');
 const { URL } = require('url');
 const QueryString = require('querystring');
-const dotenv = require('dotenv');
-dotenv.config();
+
+if(process.env.NODE_ENV !== 'PRODUCTION') {
+	const dotenv = require('dotenv');
+	dotenv.config();
+}
+
 
 // Require the framework and instantiate it
 const app = express();

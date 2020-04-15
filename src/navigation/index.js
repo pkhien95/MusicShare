@@ -4,10 +4,18 @@ import React from 'react'
 import NAVIGATORS from '../constants/navigators'
 import { AlbumDetailsScreen } from '../features/album-details'
 import { ArtistDetailsScreen } from '../features/artist-details'
+import { useSelector } from 'react-redux'
+import { BootstrapScreen } from '../features/boostrap'
 
 const Stack = createStackNavigator()
 
 function RootNavigator() {
+  const bootstrapped = useSelector(state => state.app.bootstrapped)
+
+  if (!bootstrapped) {
+    return <BootstrapScreen />
+  }
+
   return (
     <Stack.Navigator>
       <Stack.Screen
