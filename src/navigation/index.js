@@ -7,9 +7,8 @@ import { ArtistDetailsScreen } from '../features/artist-details'
 import { useSelector } from 'react-redux'
 import { BootstrapScreen } from '../features/boostrap'
 import { store } from '../store'
-import { checkSpotifyAuth, disconnectSpotifyRemote } from '../sagas/actions'
+import { checkSpotifyAuth } from '../sagas/actions'
 import { AppState } from 'react-native'
-import { isEmpty } from 'lodash'
 
 const Stack = createStackNavigator()
 
