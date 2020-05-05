@@ -56,3 +56,15 @@ export const spotifyReceiveEvent = (eventKey: string) => ({
     event: eventKey,
   },
 })
+
+export const checkSpotifyAuth = () => ({
+  type: ActionTypes.CHECK_SPOTIFY_AUTH,
+})
+
+export const disconnectSpotifyRemote = () => ({
+  type: ActionTypes.DISCONNECT_SPOTIFY_REMOTE,
+})
+
+export const setupSpotifyEventHandler = () => ({
+  type: ActionTypes.SET_UP_SPOTIFY_EVENT_HANDLER,
+})

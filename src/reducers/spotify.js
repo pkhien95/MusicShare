@@ -19,6 +19,12 @@ const spotifyReducer = (state = initialState, action) => {
           $set: action.payload.result,
         },
       })
+    case ActionTypes.DISCONNECT_SPOTIFY_REMOTE:
+      return update(state, {
+        auth: {
+          $set: {},
+        },
+      })
     default:
       return state
   }

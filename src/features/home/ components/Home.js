@@ -2,8 +2,12 @@ import React, { Component } from 'react'
 import { FlatList, PixelRatio, StyleSheet, View } from 'react-native'
 import HomeItem from './HomeItem'
 import { remote } from 'react-native-spotify-remote'
+import { useFocusEffect } from '@react-navigation/native'
 
-type HomeProps = {}
+type HomeProps = {
+  checkSpotifyAuth: () => void,
+  disconnectSpotifyRemote: () => void,
+}
 
 type HomeState = {
   trackIsPlaying: number | null,
@@ -64,7 +68,6 @@ class Home extends Component<HomeProps, HomeState> {
     )
   }
 }
-export default Home
 
 const styles = StyleSheet.create({
   container: {
@@ -85,3 +88,12 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
   },
 })
+
+export default function(props) {
+  const { checkSpotifyAuth, disconnectSpotifyRemote } = props
+  // useFocusEffect(() => {
+  //   checkSpotifyAuth()
+  //   return disconnectSpotifyRemote
+  // })
+  return <Home {...props} />
+}

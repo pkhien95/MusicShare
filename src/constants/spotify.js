@@ -32,5 +32,7 @@ export const SPOTIFY_CONFIG = {
 export const RemoteEvent = {
   PLAYER_STATE_CHANGED: 'playerStateChanged',
   REMOTE_DISCONNECTED: 'remoteDisconnected',
-  REMOTE_CONNECTED: 'remoteConnected'
+  REMOTE_CONNECTED: 'remoteConnected',
 }
+
+export const MAXIMUM_RETRY_AUTH_REMOTE = 1
