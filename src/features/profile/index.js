@@ -1,3 +1,3 @@
-import { default as ProfileScreen } from './components/Profile'
+import { default as ProfileScreen } from './containers'
 
 export { ProfileScreen }

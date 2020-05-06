@@ -4,7 +4,12 @@ import {
   SPOTIFY_CLIENT_SECRET,
   SPOTIFY_TOKEN_REFRESH_URL,
   SPOTIFY_TOKEN_SWAP_URL,
+  APPLE_MUSIC_TOKEN,
 } from 'react-native-dotenv'
+
+export const APPLE_CONFIG = {
+  token: APPLE_MUSIC_TOKEN,
+}
 
 export const SPOTIFY_CONFIG = {
   clientId: SPOTIFY_CLIENT_ID, // available on the app page
