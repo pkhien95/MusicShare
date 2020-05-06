@@ -7,6 +7,7 @@ import AlbumsSection from './AlbumsSection/AlbumsSection'
 import { StackNavigationProp } from '@react-navigation/stack'
 import NAVIGATORS from '../../../constants/navigators'
 import LottieView from 'lottie-react-native'
+import { SOURCE } from '../../../constants'
 
 type SearchProps = {
   navigation: StackNavigationProp<any, NAVIGATORS.search>,
@@ -36,11 +37,20 @@ class Search extends React.Component<SearchProps, State> {
 
     this.state = {
       isSearching: false,
+      source: SOURCE.spotify,
     }
   }
 
   searchByKeywords = (text: string) => {
-    this.props.search(text, 'artist,album')
+    const { search, source } = this.props
+
+    switch (source) {
+      case SOURCE.appleMusic:
+        search(source, text, 'artists,albums')
+        break
+      default:
+        search(source, text, 'artist,album')
+    }
   }
 
   onSearchTextChange = (text: string) => {
@@ -53,7 +63,7 @@ class Search extends React.Component<SearchProps, State> {
   }
 
   componentDidMount() {
-    const { navigation, reset } = this.props
+    const { navigation, reset, source } = this.props
     navigation.setOptions({
       headerLeft: () => null,
       headerRight: () => null,

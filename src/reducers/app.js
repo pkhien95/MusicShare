@@ -4,10 +4,11 @@ import {
 } from '../sagas/actions/action-types'
 import update from 'immutability-helper'
 import * as ProfileActionTypes from '../features/profile/actions/action-types'
+import { SOURCE } from '../constants'
 
 const initialState = {
   bootstrapped: false,
-  source: 'SPOTIFY',
+  source: SOURCE.spotify,
 }
 
 const handleBoostrapAppStart = (state, action) => {

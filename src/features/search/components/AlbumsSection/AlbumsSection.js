@@ -11,7 +11,9 @@ type AlbumsSectionProps = {
 class AlbumsSection extends React.PureComponent<AlbumsSectionProps> {
   renderItem = ({ item, index }) => {
     const { id, images, name } = item
-    const itemData = { id, name, image: images[2] }
+    const image = images && images.length > 2 ? images[2] : images[0]
+
+    const itemData = { id, name, image }
     return <AlbumItem item={itemData} onItemPress={this.onItemPress} />
   }
 
