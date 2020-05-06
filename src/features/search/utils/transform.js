@@ -6,7 +6,6 @@ export const transformArtistsToSpotify = artists => {
       id: artist.id,
       name: get(artist, 'attributes.name'),
       images: [],
-      ...artist.attributes,
     }
   })
 }
@@ -41,7 +40,7 @@ export const transformAlbumDetailToSpotify = album => {
       artists: [
         {
           name: get(track, 'attributes.artistName'),
-          ...track.relationships.artists[0],
+          ...album.relationships.artists[0],
         },
       ],
     }
