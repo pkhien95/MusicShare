@@ -20,7 +20,7 @@ const handleSpotifySearchSuccess = (state, action) => {
 
   return update(state, {
     albums: {
-      $set: normalizedAlbums.entities.albums || {},
+      $deepMerge: normalizedAlbums.entities.albums || {},
     },
     artists: {
       $deepMerge: merge(
@@ -50,7 +50,12 @@ const handleSpotifyGetAlbumDetailsSuccess = (state, action) => {
 
 const handleSpotifyGetArtistTopTracksSuccess = (state, action) => {
   const { result } = action.payload
+  console.log('handleSpotifyGetArtistTopTracksSuccess -> result', result)
   const normalizedAlbums = normalize(result, [trackSchema])
+  console.log(
+    'handleSpotifyGetArtistTopTracksSuccess -> normalizedAlbums',
+    normalizedAlbums,
+  )
 
   return update(state, {
     artists: {
