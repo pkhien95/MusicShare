@@ -2,7 +2,7 @@ import { appleMusicInstance } from './base'
 
 export const search = (
   keywords: string,
-  types: string,
+  types: string = 'artists,albums',
   limit: number = 20,
   offset: number = 0,
 ) => {

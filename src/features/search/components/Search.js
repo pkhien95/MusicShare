@@ -42,15 +42,7 @@ class Search extends React.Component<SearchProps, State> {
   }
 
   searchByKeywords = (text: string) => {
-    const { search, source } = this.props
-
-    switch (source) {
-      case SOURCE.appleMusic:
-        search(source, text, 'artists,albums')
-        break
-      default:
-        search(source, text, 'artist,album')
-    }
+    this.props.search(text)
   }
 
   onSearchTextChange = (text: string) => {
@@ -63,7 +55,7 @@ class Search extends React.Component<SearchProps, State> {
   }
 
   componentDidMount() {
-    const { navigation, reset, source } = this.props
+    const { navigation, reset } = this.props
     navigation.setOptions({
       headerLeft: () => null,
       headerRight: () => null,

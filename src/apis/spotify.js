@@ -2,7 +2,7 @@ import { spotifyInstance } from './base'
 
 export const search = (
   keywords: string,
-  types: string,
+  types: string = 'artist,album',
   limit: number = 20,
   offset: number = 0,
 ) => {
