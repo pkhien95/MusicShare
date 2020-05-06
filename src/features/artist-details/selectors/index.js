@@ -32,7 +32,7 @@ export const tracksSelector = createSelector(
 const getAppleTracksFromArtist = (artist, trackEntities) => {
   return get(artist, 'tracks', []).map(id => ({
     ...trackEntities[id],
-    artists: [{ name: get(trackEntities[id], 'artistName', []) }],
+    artists: [{ name: get(trackEntities[id], 'name', []) }],
   }))
 }
 

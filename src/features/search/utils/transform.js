@@ -73,6 +73,7 @@ export const transformArtistDetailToSpotify = artist => {
           name: get(track, 'attributes.artistName'),
           id: artist.id,
           ...artist.attributes,
+          tracks: [track.id],
         },
       ],
     }
