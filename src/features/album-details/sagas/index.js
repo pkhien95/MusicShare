@@ -18,10 +18,9 @@ function* getAlbumDetails(action) {
         const result = yield call(appleMusicApi.getAlbumDetails, id)
         const rawAlbum = get(result, 'data.data[0]')
         data = yield call(transformAlbumDetailToSpotify, rawAlbum)
-        console.log('function*getAlbumDetails -> response', data)
         break
       default:
-        response = yield call(spotifyApi.getAlbumDetails, id)
+        const response = yield call(spotifyApi.getAlbumDetails, id)
         data = response.data
     }
 
