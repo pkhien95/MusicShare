@@ -1,16 +1,31 @@
 import { connect } from 'react-redux'
 import AlbumDetails from '../components/AlbumDetails'
 import { getAlbumDetailsRequest } from '../actions'
-import { albumSelector, artistsSelector, tracksSelector } from '../selectors'
+import {
+  albumSelector,
+  artistsSelector,
+  tracksSelector,
+  appleArtistsSelector,
+  appleTrackSelector,
+} from '../selectors'
 import { showBottomActionSheet } from '../../bottom-actions-sheet/actions'
 import * as HomeActions from '../../home/actions'
 import { showToast } from '../../toast/actions'
+import { SOURCE } from '../../../constants'
 
-const mapStateToProps = (state, ownProps) => ({
-  album: albumSelector(state, ownProps),
-  artists: artistsSelector(state, ownProps),
-  tracks: tracksSelector(state, ownProps),
-})
+const mapStateToProps = (state, ownProps) => {
+  return {
+    album: albumSelector(state, ownProps),
+    artists:
+      state.app.source === SOURCE.appleMusic
+        ? appleArtistsSelector(state, ownProps)
+        : artistsSelector(state, ownProps),
+    tracks:
+      state.app.source === SOURCE.appleMusic
+        ? appleTrackSelector(state, ownProps)
+        : tracksSelector(state, ownProps),
+  }
+}
 
 const mapDispatchToProps = dispatch => ({
   getAlbumDetails: (id: string) => dispatch(getAlbumDetailsRequest(id)),

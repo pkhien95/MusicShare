@@ -28,6 +28,13 @@ export const artistsSelector = createSelector(
   getArtistsFromAlbum,
 )
 
+const getAppleArtists = album => [{ name: album.artistName }]
+
+export const appleArtistsSelector = createSelector(
+  albumSelector,
+  getAppleArtists,
+)
+
 const getTracksFromAlbum = (album, trackEntities, artistEntities) => {
   return get(album, 'tracks.items', []).map(id => ({
     ...trackEntities[id],
@@ -42,4 +49,17 @@ export const tracksSelector = createSelector(
   getTrackEntities,
   getArtistEntities,
   getTracksFromAlbum,
+)
+
+const getAppleTracksFromAlbum = (album, trackEntities) => {
+  return get(album, 'tracks.items', []).map(id => ({
+    ...trackEntities[id],
+    artists: [{ name: get(trackEntities[id], 'artistName', []) }],
+  }))
+}
+
+export const appleTrackSelector = createSelector(
+  albumSelector,
+  getTrackEntities,
+  getAppleTracksFromAlbum,
 )

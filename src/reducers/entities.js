@@ -20,7 +20,7 @@ const handleSpotifySearchSuccess = (state, action) => {
 
   return update(state, {
     albums: {
-      $deepMerge: normalizedAlbums.entities.albums || {},
+      $set: normalizedAlbums.entities.albums || {},
     },
     artists: {
       $deepMerge: merge(
