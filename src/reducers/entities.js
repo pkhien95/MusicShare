@@ -50,12 +50,7 @@ const handleSpotifyGetAlbumDetailsSuccess = (state, action) => {
 
 const handleSpotifyGetArtistTopTracksSuccess = (state, action) => {
   const { result } = action.payload
-  console.log('handleSpotifyGetArtistTopTracksSuccess -> result', result)
   const normalizedAlbums = normalize(result, [trackSchema])
-  console.log(
-    'handleSpotifyGetArtistTopTracksSuccess -> normalizedAlbums',
-    normalizedAlbums,
-  )
 
   return update(state, {
     artists: {
