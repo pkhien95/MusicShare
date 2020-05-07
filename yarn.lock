@@ -940,6 +940,11 @@
     "@types/yargs" "^15.0.0"
     chalk "^3.0.0"
 
+"@pkhien/react-native-apple-music@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@pkhien/react-native-apple-music/-/react-native-apple-music-1.0.2.tgz#41a8f286ac93a03f4389dbfdeb80098eced2f280"
+  integrity sha512-icNg1degnKtxVVZOciovY01U4ayv5qFaYECctL0WBhHEbnjZ7kMaB2yV3rpi/BEJ49lmv0ZmHn9no34sjGer4A==
+
 "@react-native-community/async-storage@^1.9.0":
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/@react-native-community/async-storage/-/async-storage-1.9.0.tgz#af26a8879bd2987970fbbe81a9623851d29a56f1"
@@ -5790,6 +5795,11 @@ react-native-screens@^2.4.0:
   integrity sha512-7GcXlaj7IIrM4l5Ub7BPTkNQJ2slHGt2bhmfWmW73NTXEv+7pjHlp+JpQO32Yn+O8UQGPFf0rsesfYUdER7ppQ==
   dependencies:
     debounce "^1.2.0"
+
+react-native-simple-radio-button@^2.7.4:
+  version "2.7.4"
+  resolved "https://registry.yarnpkg.com/react-native-simple-radio-button/-/react-native-simple-radio-button-2.7.4.tgz#86e2dbe8af9e6bf60eee088f60466f7a975e7758"
+  integrity sha512-QOZNmJUn0ViBGU+at7wAG/uGzd5PfXi0kMHr9lfTCLXknW/f9f2fOVjxjdHvOCdf/zA/eMJBjGjtusSDzQf1+w==
 
 react-native-sound@^0.11.0:
   version "0.11.0"

@@ -3,9 +3,12 @@ import {
   BOOTSTRAP_APPLICATION_START,
 } from '../sagas/actions/action-types'
 import update from 'immutability-helper'
+import * as ProfileActionTypes from '../features/profile/actions/action-types'
+import { SOURCE } from '../constants'
 
 const initialState = {
   bootstrapped: false,
+  source: SOURCE.appleMusic,
 }
 
 const handleBoostrapAppStart = (state, action) => {
@@ -20,6 +23,13 @@ const handleBoostrapAppComplete = (state, action) => {
   })
 }
 
+const handleSelectSource = (state, action) => {
+  const { source } = action.payload
+  return update(state, {
+    source: { $set: source },
+  })
+}
+
 const appReducer = (state = initialState, action) => {
   switch (action.type) {
     case BOOTSTRAP_APPLICATION_START:
@@ -27,6 +37,9 @@ const appReducer = (state = initialState, action) => {
 
     case BOOTSTRAP_APPLICATION_COMPLETE:
       return handleBoostrapAppComplete(state, action)
+
+    case ProfileActionTypes.SELECT_SOURCE:
+      return handleSelectSource(state, action)
 
     default:
       return state

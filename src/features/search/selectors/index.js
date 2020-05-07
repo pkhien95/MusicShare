@@ -4,6 +4,8 @@ const albumEntities = state => state.entities.albums
 
 const searchedAlbums = state => state.search.albumIds
 
+export const sourceSelector = state => state.app.source
+
 const transformSearchedAlbum = (entities, ids) => {
   return ids.map(id => entities[id])
 }

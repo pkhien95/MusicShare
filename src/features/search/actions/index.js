@@ -24,7 +24,7 @@ export const spotifySearchSuccess = (artists: any[], albums: any[]) => ({
 })
 
 export const spotifySearchFailure = (error: any) => ({
-  type: ActionTypes.SPOTIFY_SEARCH_SUCCESS,
+  type: ActionTypes.SPOTIFY_SEARCH_FAILURE,
   payload: {
     error,
   },

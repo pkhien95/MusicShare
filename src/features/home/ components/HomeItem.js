@@ -8,12 +8,13 @@ import { HOME_SCREEN_ITEM_TYPE } from '../constants'
 import { capitalize, get } from 'lodash'
 import { getArtistsNamesFromList } from '../../../utils'
 import { openInSpotify } from '../../../utils/linking'
+import { SOURCE } from '../../../constants'
 
 type HomeItemProps = {
   item: any,
   isPlaying: boolean,
   onPlay: (item: any) => void,
-  onPause: () => void,
+  onPause: (item: any) => void,
 }
 
 class HomeItem extends React.PureComponent<HomeItemProps> {
@@ -23,7 +24,8 @@ class HomeItem extends React.PureComponent<HomeItemProps> {
   }
 
   onPauseButtonPress = () => {
-    this.props.onPause()
+    const { item, onPause } = this.props
+    onPause(item)
   }
 
   onOpenInSpotifyButtonPress = () => {
@@ -43,7 +45,7 @@ class HomeItem extends React.PureComponent<HomeItemProps> {
   }
 
   render() {
-    const { type, name, artists } = this.props.item
+    const { type, name, artists, source } = this.props.item
     const buttonHitSlop = { top: 12, right: 12, bottom: 12, left: 12 }
 
     return (
@@ -71,11 +73,13 @@ class HomeItem extends React.PureComponent<HomeItemProps> {
             color={COLORS.black}
           />
         </TouchableOpacity>
-        <TouchableOpacity
-          hitSlop={buttonHitSlop}
-          onPress={this.onOpenInSpotifyButtonPress}>
-          <Entypo name={'spotify'} size={20} color={COLORS.black} />
-        </TouchableOpacity>
+        {source === SOURCE.spotify && (
+          <TouchableOpacity
+            hitSlop={buttonHitSlop}
+            onPress={this.onOpenInSpotifyButtonPress}>
+            <Entypo name={'spotify'} size={20} color={COLORS.black} />
+          </TouchableOpacity>
+        )}
       </View>
     )
   }
