@@ -9,6 +9,7 @@ import { BootstrapScreen } from '../features/boostrap'
 import { store } from '../store'
 import { checkSpotifyAuth } from '../sagas/actions'
 import { AppState } from 'react-native'
+import {SOURCE} from '../constants'
 
 const Stack = createStackNavigator()
 
@@ -21,7 +22,9 @@ function RootNavigator() {
   const handleAppStateChange = useCallback(
     nextAppState => {
       if (appState.match(/inactive|background/) && nextAppState === 'active') {
-        store.dispatch(checkSpotifyAuth())
+        if (store.getState().app.source === SOURCE.spotify) {
+          store.dispatch(checkSpotifyAuth())
+        }
       } else {
         // if (!isEmpty(session)) {
         //   store.dispatch(disconnectSpotifyRemote())

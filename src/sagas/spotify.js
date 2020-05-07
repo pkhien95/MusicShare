@@ -22,6 +22,8 @@ import { showToast } from '../features/toast/actions'
 import { ToastType } from '../features/toast/constants'
 import { isEmpty } from 'lodash'
 import { eventChannel } from 'redux-saga'
+import { SOURCE } from '../constants'
+import { SELECT_SOURCE } from '../features/profile/actions/action-types'
 
 const config = {
   clientID: SPOTIFY_CONFIG.clientId,
@@ -137,11 +139,21 @@ function* disconnectRemote() {
   yield call(remote.disconnect)
 }
 
+function* handleSourceChanged(action) {
+  const { source } = action.payload
+  if (source !== SOURCE.spotify) {
+    yield call(disconnectRemote)
+  } else {
+    yield call(authSpotify)
+  }
+}
+
 function* spotifySaga() {
   yield takeLatest(ActionTypes.AUTHORIZE_SPOTIFY_REQUEST, authSpotify)
   yield takeLatest(ActionTypes.SPOTIFY_RECEIVE_EVENT, handleRemoteEvent)
   yield takeLatest(ActionTypes.DISCONNECT_SPOTIFY_REMOTE, disconnectRemote)
   yield takeLatest(ActionTypes.SET_UP_SPOTIFY_EVENT_HANDLER, setupRemoteEvent)
+  yield takeLatest(SELECT_SOURCE, handleSourceChanged)
 }
 
 export default spotifySaga

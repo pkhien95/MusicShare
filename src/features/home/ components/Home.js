@@ -35,7 +35,7 @@ class Home extends Component<HomeProps, HomeState> {
         trackIsPlaying: id,
       },
       () => {
-        if (source === SOURCE.spotify) {
+        if (source !== SOURCE.appleMusic) {
           remote.playUri(uri)
         } else {
           if (
@@ -60,7 +60,7 @@ class Home extends Component<HomeProps, HomeState> {
         trackIsPlaying: null,
       },
       () => {
-        if (source === SOURCE.spotify) {
+        if (source !== SOURCE.appleMusic) {
           remote.pause()
         } else {
           MediaPlayer.pause()
