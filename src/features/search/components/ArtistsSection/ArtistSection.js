@@ -11,7 +11,9 @@ type ArtistSectionProps = {
 class ArtistSection extends React.PureComponent<ArtistSectionProps> {
   renderItem = ({ item, index }) => {
     const { id, images, name } = item
-    const itemData = { id, name, image: images[2] }
+    const image = images && images.length > 2 ? images[2] : null
+
+    const itemData = { id, name, image }
     return <ArtistItem item={itemData} onItemPress={this.onItemPress} />
   }
 
