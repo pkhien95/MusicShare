@@ -26,7 +26,7 @@ function* getArtistTopTracks(action) {
 
     yield put(Actions.getArtistTopTracksSuccess(tracks))
   } catch (error) {
-    console.log(error)
+    yield put(Actions.getArtistTopTracksFailure(error))
   }
 }
 
