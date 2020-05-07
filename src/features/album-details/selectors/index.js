@@ -54,7 +54,7 @@ export const tracksSelector = createSelector(
 const getAppleTracksFromAlbum = (album, trackEntities) => {
   return get(album, 'tracks.items', []).map(id => ({
     ...trackEntities[id],
-    artists: [{ name: get(trackEntities[id], 'artistName', []) }],
+    artists: [{ name: get(trackEntities[id], 'name', []) }],
   }))
 }
 

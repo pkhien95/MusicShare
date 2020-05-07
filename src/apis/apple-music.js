@@ -19,3 +19,7 @@ export const search = (
 export const getAlbumDetails = (id: string) => {
   return appleMusicInstance.get(`albums/${id}`)
 }
+
+export const getArtistTopTracks = (id: string) => {
+  return appleMusicInstance.get(`artists/${id}?include=songs`)
+}

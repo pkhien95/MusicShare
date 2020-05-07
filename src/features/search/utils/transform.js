@@ -6,7 +6,6 @@ export const transformArtistsToSpotify = artists => {
       id: artist.id,
       name: get(artist, 'attributes.name'),
       images: [],
-      ...artist.attributes,
     }
   })
 }
@@ -41,7 +40,7 @@ export const transformAlbumDetailToSpotify = album => {
       artists: [
         {
           name: get(track, 'attributes.artistName'),
-          ...track.relationships.artists[0],
+          ...album.relationships.artists[0],
         },
       ],
     }
@@ -55,4 +54,28 @@ export const transformAlbumDetailToSpotify = album => {
   album.images = [{ url: image }]
 
   return album
+}
+
+export const transformArtistDetailToSpotify = artist => {
+  const rawTracks = get(artist, 'relationships.songs.data')
+
+  return rawTracks.map(track => {
+    const url = get(track, 'attributes.artwork.url')
+    let image = url.replace('{w}', '80')
+    image = image.replace('{h}', '80')
+
+    return {
+      id: track.id,
+      name: get(track, 'attributes.name'),
+      images: [{ url: image }],
+      artists: [
+        {
+          name: get(track, 'attributes.artistName'),
+          id: artist.id,
+          ...artist.attributes,
+          tracks: [track.id],
+        },
+      ],
+    }
+  })
 }
