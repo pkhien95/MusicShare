@@ -1,4 +1,5 @@
 import { get } from 'lodash'
+import { SOURCE } from '../../../constants'
 
 export const transformArtistsToSpotify = artists => {
   return artists.map(artist => {
@@ -20,13 +21,14 @@ export const transformAlbumsToSpotify = albums => {
       name: get(album, 'attributes.name'),
       images: [{ url: image }],
       artistName: get(album, 'attributes.artistName'),
+      type: 'album',
+      source: SOURCE.spotify,
     }
   })
 }
 
 export const transformAlbumDetailToSpotify = album => {
   const rawTracks = get(album, 'relationships.tracks.data')
-
   album.tracks = {}
   album.tracks.items = rawTracks.map(track => {
     const url = get(track, 'attributes.artwork.url')
@@ -40,9 +42,11 @@ export const transformAlbumDetailToSpotify = album => {
       artists: [
         {
           name: get(track, 'attributes.artistName'),
-          ...album.relationships.artists[0],
+          ...album.relationships.artists.data[0],
         },
       ],
+      type: 'track',
+      source: SOURCE.appleMusic,
     }
   })
 
@@ -52,6 +56,8 @@ export const transformAlbumDetailToSpotify = album => {
 
   album.name = get(album, 'attributes.name')
   album.images = [{ url: image }]
+  album.type = 'album'
+  album.source = SOURCE.appleMusic
 
   return album
 }
@@ -76,6 +82,8 @@ export const transformArtistDetailToSpotify = artist => {
           tracks: [track.id],
         },
       ],
+      type: 'track',
+      source: SOURCE.appleMusic,
     }
   })
 }

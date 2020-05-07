@@ -8,7 +8,7 @@ import { SOURCE } from '../constants'
 
 const initialState = {
   bootstrapped: false,
-  source: SOURCE.spotify,
+  source: SOURCE.appleMusic,
 }
 
 const handleBoostrapAppStart = (state, action) => {

@@ -5,6 +5,7 @@ import searchSaga from '../features/search/sagas'
 import albumDetailsSaga from '../features/album-details/sagas'
 import artistDetailsSaga from '../features/artist-details/sagas'
 import homeSaga from '../features/home/sagas'
+import appleMusicSaga from './appleMusic'
 
 function* rootSaga() {
   yield all([
@@ -14,6 +15,7 @@ function* rootSaga() {
     albumDetailsSaga(),
     artistDetailsSaga(),
     homeSaga(),
+    appleMusicSaga(),
   ])
 }
 

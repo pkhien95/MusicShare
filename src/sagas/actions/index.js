@@ -68,3 +68,21 @@ export const disconnectSpotifyRemote = () => ({
 export const setupSpotifyEventHandler = () => ({
   type: ActionTypes.SET_UP_SPOTIFY_EVENT_HANDLER,
 })
+
+export const authAppleMusicRequest = () => ({
+  type: ActionTypes.AUTHORIZE_APPLE_MUSIC_REQUEST,
+})
+
+export const authAppleMusicSuccess = result => ({
+  type: ActionTypes.AUTHORIZE_APPLE_MUSIC_SUCCESS,
+  payload: {
+    result,
+  },
+})
+
+export const authAppleMusicFailure = error => ({
+  type: ActionTypes.AUTHORIZE_APPLE_MUSIC_FAILURE,
+  payload: {
+    error,
+  },
+})

@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import RadioForm from 'react-native-simple-radio-button'
 
 const source_from = [
@@ -8,6 +8,7 @@ const source_from = [
 ]
 
 type Props = {
+  source: string,
   selectSource: value => void,
 }
 
@@ -16,7 +17,7 @@ class Profile extends React.Component<Props> {
     super(props)
 
     this.state = {
-      selected: 0,
+      selected: source_from.findIndex(source => source.value === props.source),
     }
   }
 

@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { FlatList, PixelRatio, StyleSheet, View } from 'react-native'
 import HomeItem from './HomeItem'
 import { remote } from 'react-native-spotify-remote'
-import { useFocusEffect } from '@react-navigation/native'
+import { SOURCE } from '../../../constants'
+import { MediaPlayer } from '@pkhien/react-native-apple-music'
 
 type HomeProps = {
   checkSpotifyAuth: () => void,
@@ -18,23 +19,54 @@ class Home extends Component<HomeProps, HomeState> {
     super()
 
     this.state = {
+      trackPaused: null,
       trackIsPlaying: null,
     }
   }
 
   onPlay = (item: any) => {
-    const { id, uri } = item
-    this.setState({
-      trackIsPlaying: id,
-    })
-    remote.playUri(uri)
+    const { id, uri, source } = item
+    const prevtrackIsPlaying = this.state.trackIsPlaying
+    const prevtrackPaused = this.state.trackPaused
+
+    this.setState(
+      {
+        trackPaused: null,
+        trackIsPlaying: id,
+      },
+      () => {
+        if (source === SOURCE.spotify) {
+          remote.playUri(uri)
+        } else {
+          if (
+            !prevtrackPaused ||
+            prevtrackPaused !== id ||
+            (prevtrackIsPlaying && prevtrackIsPlaying !== id) ||
+            (!prevtrackIsPlaying && !prevtrackPaused)
+          ) {
+            MediaPlayer.setQueue([id])
+          }
+          MediaPlayer.play()
+        }
+      },
+    )
   }
 
-  onPause = () => {
-    remote.pause()
-    this.setState({
-      trackIsPlaying: null,
-    })
+  onPause = (item: any) => {
+    const { source, id } = item
+    this.setState(
+      {
+        trackPaused: id,
+        trackIsPlaying: null,
+      },
+      () => {
+        if (source === SOURCE.spotify) {
+          remote.pause()
+        } else {
+          MediaPlayer.pause()
+        }
+      },
+    )
   }
 
   renderItem = ({ item, index }) => {
