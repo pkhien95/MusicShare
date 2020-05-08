@@ -1,5 +1,6 @@
 import { get } from 'lodash'
 import { SOURCE } from '../../../constants'
+import Axios from 'axios'
 
 export const transformArtistsToSpotify = artists => {
   return artists.map(artist => {
@@ -62,8 +63,13 @@ export const transformAlbumDetailToSpotify = album => {
   return album
 }
 
-export const transformArtistDetailToSpotify = artist => {
+export const transformArtistDetailToSpotify = async artist => {
   const rawTracks = get(artist, 'relationships.songs.data')
+
+  const artistUrl = get(artist, 'attributes.url')
+  const artistImageUrl = await getArtistImage(artistUrl)
+  let artistImage = artistImageUrl.replace('{w}', '80')
+  artistImage = artistImage.replace('{h}', '80')
 
   return rawTracks.map(track => {
     const url = get(track, 'attributes.artwork.url')
@@ -76,14 +82,24 @@ export const transformArtistDetailToSpotify = artist => {
       images: [{ url: image }],
       artists: [
         {
-          name: get(track, 'attributes.artistName'),
           id: artist.id,
           ...artist.attributes,
+          images: [{ url: artistImage }],
           tracks: [track.id],
         },
       ],
       type: 'track',
       source: SOURCE.appleMusic,
     }
+  })
+}
+
+const getArtistImage = artistUrl => {
+  return Axios.get(artistUrl).then(response => {
+    const html = response.data
+    const ogImage = html.match(
+      /<meta property=\"og:image\" content=\"(.*png)\"/,
+    )[1]
+    return ogImage.replace(/[\d]+x[\d]+/, '{w}x{h}')
   })
 }

@@ -12,10 +12,7 @@ import { SOURCE } from '../../../constants'
 
 const mapStateToProps = (state, ownProps) => ({
   artist: artistSelector(state, ownProps),
-  tracks:
-    state.app.source === SOURCE.appleMusic
-      ? appleTrackSelector(state, ownProps)
-      : tracksSelector(state, ownProps),
+  tracks: tracksSelector(state, ownProps),
 })
 
 const mapDispatchToProps = dispatch => ({
