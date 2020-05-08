@@ -38,7 +38,7 @@ export const transformAlbumDetailToSpotify = album => {
 
     return {
       id: track.id,
-      name: get(track, 'attributes.name'),
+      ...track.attributes,
       images: [{ url: image }],
       artists: [
         {
@@ -78,7 +78,7 @@ export const transformArtistDetailToSpotify = async artist => {
 
     return {
       id: track.id,
-      name: get(track, 'attributes.name'),
+      ...track.attributes,
       images: [{ url: image }],
       artists: [
         {

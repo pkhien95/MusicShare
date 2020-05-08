@@ -1,13 +1,14 @@
 import React from 'react'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Entypo from 'react-native-vector-icons/Entypo'
+import Fontisto from 'react-native-vector-icons/Fontisto'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import COLORS from '../../../theme/colors'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { HOME_SCREEN_ITEM_TYPE } from '../constants'
 import { capitalize, get } from 'lodash'
 import { getArtistsNamesFromList } from '../../../utils'
-import { openInSpotify } from '../../../utils/linking'
+import { openInAppleMusic, openInSpotify } from '../../../utils/linking'
 import { SOURCE } from '../../../constants'
 
 type HomeItemProps = {
@@ -32,6 +33,13 @@ class HomeItem extends React.PureComponent<HomeItemProps> {
     const url = get(this.props.item, 'external_urls.spotify')
     if (url) {
       openInSpotify(url)
+    }
+  }
+
+  onOpenInAppleMusicButtonPress = () => {
+    const url = get(this.props.item, 'url')
+    if (url) {
+      openInAppleMusic(url)
     }
   }
 
@@ -73,11 +81,17 @@ class HomeItem extends React.PureComponent<HomeItemProps> {
             color={COLORS.black}
           />
         </TouchableOpacity>
-        {source === SOURCE.spotify && (
+        {!source || source === SOURCE.spotify ? (
           <TouchableOpacity
             hitSlop={buttonHitSlop}
             onPress={this.onOpenInSpotifyButtonPress}>
             <Entypo name={'spotify'} size={20} color={COLORS.black} />
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity
+            hitSlop={buttonHitSlop}
+            onPress={this.onOpenInAppleMusicButtonPress}>
+            <Fontisto name={'applemusic'} size={20} color={COLORS.black} />
           </TouchableOpacity>
         )}
       </View>

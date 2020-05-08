@@ -7,3 +7,11 @@ export const openInSpotify = url => {
     }
   })
 }
+
+export const openInAppleMusic = url => {
+  Linking.canOpenURL(url).then(supported => {
+    if (supported) {
+      Linking.openURL(url)
+    }
+  })
+}
